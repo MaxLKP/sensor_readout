@@ -1,5 +1,4 @@
 import smbus2
-import time
 
 # Registers
 TEMP_XLSB = 0xFC
