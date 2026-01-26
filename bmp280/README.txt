@@ -1,1 +1,1 @@
-Trying to write readout scripts for sensors in python. At the moment, includes reading BMP280 temp./press. sensor.
+Python readout for BMP280 sensor.
