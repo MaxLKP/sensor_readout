@@ -1,0 +1,1 @@
+Simple BME280 python readout. Humidity values close to control script. Might need some improvement here.
