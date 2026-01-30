@@ -18,7 +18,7 @@ printf "${Green}Staring Influx service\n"
 /bin/sudo systemctl enable influxdb
 /bin/sudo systemctl start influxdb
 printf "${Green}Creating Database\n"
-/bin/influx -execute "CREATE DATABASE test"
+/bin/influx -execute "CREATE DATABASE db"
 #Get Sensor Readout
 printf "${Green}Get Sensor Readout from GIT\n"
 /bin/sudo apt-get install git
