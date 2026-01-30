@@ -7,7 +7,11 @@ bme280 = bme280(0x76, 1)
 client = InfluxDBClient(host = 'localhost', port = 8086)
 client.switch_database('db')
 
-temperature = bme280.get_temp()
+temp = bme280.get_temp()
+press = bme280.get_press()
+hum = bme280.get_hum()
 
-client.write_points([{"measurement": "bme280_temp", "tags": {"location": "blueberry"}, "fields": {"value": temperature}}])
+client.write_points([{"measurement": "bme280", "tags": {"location": "blueberry"}, "fields": {"value": temp}}])
+client.write_points([{"measurement": "bme280", "tags": {"location": "blueberry"}, "fields": {"value": press}}])
+client.write_points([{"measurement": "bme280", "tags": {"location": "blueberry"}, "fields": {"value": hum}}])
 client.close()

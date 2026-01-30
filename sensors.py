@@ -96,6 +96,7 @@ class bme280:
 
     def get_press(self):
         rawpress = self.__read_rawpress()
+        rawtemp = self.get_temp()
         var1 = self.t - 128000
         var2 = var1**2 * self.calib['dig_P6']
         var2 = var2 + ((var1 * self.calib['dig_P5']) << 17)
@@ -115,7 +116,8 @@ class bme280:
 
     def get_hum(self):
         rawhum = self.__read_rawhum()
-
+        rawtemp = self.get_temp()
+        
         v_x1_u32r = self.t - 76800
  
         v_x1_u32r = ((((rawhum << 14) - ((int(self.calib['dig_H4']) << 20) - (int(self.calib['dig_H5']) * v_x1_u32r)) + (16384)) >> 15) * (((((((v_x1_u32r * int(self.calib['dig_H6'])) >> 10) * (((v_x1_u32r * int(self.calib['dig_H3'])) >> 11) + (32768))) >> 10) + (2097152)) * int(self.calib['dig_H2']) + 8192) >> 14))
@@ -127,19 +129,6 @@ class bme280:
         return v_x1_u32r
 
 class bmp280:
-    # Registers
-    TEMP_XLSB = 0xFC
-    TEMP_LSB = 0xFB
-    TEMP_MSB = 0xFA
-    PRESS_XLSB = 0xF9
-    PRESS_LSB = 0xF8
-    PRESS_MSB = 0xF7
-    CONFIG = 0xF5
-    CTRL_MEAS = 0xF4
-    STATUS = 0xF3
-    RESET = 0xE0
-    ID = 0xD0
-
     def __init__(self, adress, bus):
         self.adress = adress
         self.bus = smbus2.SMBus(bus)
